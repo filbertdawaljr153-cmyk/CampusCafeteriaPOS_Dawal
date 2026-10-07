@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt - Campus Cafeteria POS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <nav class="sidebar" aria-label="Main navigation">
+      <div class="brand">Campus Cafeteria<small>POS system</small></div>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="index.html">New Order</a></li>
+        <li><a href="receipt.html" aria-current="page">Receipt</a></li>
+      </ul>
+    </nav>
+
+    <div class="content">
+
+      <header class="header">
+        <h1>Receipt</h1>
+        <p>Payment confirmation and transaction summary</p>
+      </header>
+
+      <main class="receipt-page">
+        <div id="confirmation" class="confirmation hidden" aria-live="polite">
+          <strong>Payment Successful!</strong>
+          <div class="confirm-row">
+            <span>Total</span>
+            <span id="conf-total">₱0.00</span>
+          </div>
+          <div class="confirm-row">
+            <span>Amount Paid</span>
+            <span id="conf-paid">₱0.00</span>
+          </div>
+          <div class="confirm-row">
+            <span>Change</span>
+            <span id="conf-change">₱0.00</span>
+          </div>
+        </div>
+
+        <div id="receipt" class="receipt" aria-live="polite"></div>
+
+        <button id="new-btn" class="btn btn-primary">New Transaction</button>
+      </main>
+    </div>
+  </div>
+
+  <script src="receipt.js"></script>
+</body>
+</html>

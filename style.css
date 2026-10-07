@@ -1,0 +1,365 @@
+/* ==========================================================
+   Campus Cafeteria POS - simple green and white theme
+   Designed for a standard desktop / laptop screen
+   (mouse + keyboard). Still stacks on narrow windows.
+   ========================================================== */
+
+/* ---------- Colors (change these to re-theme the app) ---------- */
+:root {
+  --green-dark: #1b5e20;
+  --green: #2e7d32;
+  --green-light: #e8f5e9;
+  --border: #c8e6c9;
+  --text: #1f2d1f;
+  --red: #c62828;
+  --red-light: #fdecea;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: var(--text);
+  background: #f4faf4;
+}
+
+/* Utility classes */
+.hidden { display: none !important; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+}
+
+/* ---------- Header ---------- */
+.header {
+  background: var(--green);
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+}
+.header h1 { margin: 0 0 2px; font-size: 1.7rem; }
+.header p  { margin: 0; opacity: 0.9; }
+
+/* ---------- Layout: products on the left, order + payment on the right ---------- */
+.layout {
+  max-width: 1200px;
+  margin: 16px auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.side { display: flex; flex-direction: column; gap: 16px; }
+
+.panel {
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.panel h2 {
+  margin: 0 0 12px;
+  font-size: 1.2rem;
+  color: var(--green-dark);
+  border-bottom: 2px solid var(--green-light);
+  padding-bottom: 8px;
+}
+
+/* Payment gets a stronger border so it stands out as its own area */
+.payment-panel { border-color: var(--green); }
+
+/* ---------- Product cards ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.product-card {
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  background: var(--green-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+.product-name  { font-weight: bold; }
+.product-price { color: var(--green-dark); font-size: 1.1rem; font-weight: bold; }
+
+/* Product images: put pictures in the "images" folder (see script.js) */
+.product-image {
+  height: 110px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  border: 2px dashed var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7a6b;
+  font-size: 0.85rem;
+}
+.product-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  border: none;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+/* Clear keyboard focus outline (Tab key) */
+.btn:focus-visible, .qty-btn:focus-visible, .remove-btn:focus-visible, input:focus-visible {
+  outline: 3px solid #1565c0;
+  outline-offset: 2px;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-add, .btn-primary { background: var(--green); color: #fff; }
+.btn-add:hover:not(:disabled), .btn-primary:hover:not(:disabled) { background: var(--green-dark); }
+
+.btn-secondary { background: #fff; color: var(--green-dark); border: 2px solid var(--green); }
+.btn-secondary:hover { background: var(--green-light); }
+
+.button-row { display: flex; gap: 10px; margin-top: 12px; }
+.button-row .btn { flex: 1; padding: 12px; font-weight: bold; }
+
+/* ---------- Cart ---------- */
+/* The list scrolls inside its box, so Total and Payment stay visible on a laptop screen */
+.cart-items { min-height: 60px; max-height: 240px; overflow-y: auto; }
+.empty-cart { text-align: center; color: #6b7a6b; padding: 16px 0; margin: 0; }
+
+.cart-item { border-bottom: 1px solid var(--border); padding: 8px 0; }
+.cart-item-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: bold;
+}
+.cart-item-price { color: #5a6b5a; font-size: 0.9rem; margin: 2px 0 6px; }
+
+.cart-item-controls { display: flex; align-items: center; gap: 8px; }
+.qty-btn {
+  width: 34px; height: 34px;
+  border: 2px solid var(--green);
+  background: #fff;
+  color: var(--green-dark);
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.qty-btn:hover:not(:disabled) { background: var(--green-light); }
+.qty-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.qty-value { min-width: 24px; text-align: center; font-weight: bold; }
+
+.remove-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--red);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 6px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--green-dark);
+  padding: 12px 0 6px;
+  border-top: 2px solid var(--green);
+  margin-top: 6px;
+}
+
+/* ---------- Feedback messages ---------- */
+/* Success (green) - shown under the total. Space is reserved so nothing jumps. */
+.status { margin: 6px 0 0; min-height: 2.8em; padding: 0; }
+.status.success {
+  background: #e8f5e9;
+  color: var(--green-dark);
+  border: 1px solid var(--green);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-weight: bold;
+}
+
+/* Error (red) - shown under the Amount Paid box */
+.message { margin: 10px 0 0; }
+.message.error {
+  background: var(--red-light);
+  color: var(--red);
+  border: 1px solid var(--red);
+  border-radius: 6px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* ---------- Payment ---------- */
+.payment-panel label { display: block; font-weight: bold; margin-bottom: 6px; }
+.payment-panel input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.2rem;
+  border: 2px solid var(--green);
+  border-radius: 6px;
+}
+.payment-panel input.invalid { border-color: var(--red); background: var(--red-light); }
+
+/* ---------- Receipt page (receipt.html) ---------- */
+.receipt-page { max-width: 500px; margin: 20px auto 30px; padding: 0 16px; }
+
+.confirmation {
+  background: #fff;
+  border: 2px solid var(--green);
+  border-radius: 6px;
+  padding: 12px;
+  color: var(--green-dark);
+}
+.confirmation > strong { font-size: 1.2rem; }
+.confirm-row { display: flex; justify-content: space-between; margin-top: 6px; color: var(--text); }
+.receipt-page .confirmation { margin: 0 0 16px; }
+
+.receipt {
+  max-width: 460px;
+  margin: 0 auto;
+  background: #fff;
+  border: 2px dashed var(--green);
+  border-radius: 6px;
+  padding: 18px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.95rem;
+}
+.receipt hr { border: none; border-top: 2px dashed #888; margin: 10px 0; }
+.receipt .center { text-align: center; }
+.receipt .center strong { font-size: 1.15rem; }
+.receipt-row { display: flex; justify-content: space-between; gap: 8px; margin: 4px 0; }
+.receipt-row .item-name { flex: 1; }
+.receipt-total { font-weight: bold; }
+
+.receipt-page .btn { width: 100%; margin-top: 16px; padding: 12px; font-weight: bold; }
+.no-receipt { text-align: center; }
+.no-receipt a { color: var(--green-dark); font-weight: bold; }
+
+/* ---------- Narrow windows (fallback only) ---------- */
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+  .button-row { flex-direction: column; }
+}
+
+/* ==========================================================
+   Left navigation + page frame (used on every page)
+   ========================================================== */
+.app { display: flex; min-height: 100vh; }
+.content { flex: 1; min-width: 0; }   /* min-width 0 lets wide tables scroll instead of stretching the page */
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--green-dark);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 18px 0;
+}
+.brand {
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 0 18px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  margin-bottom: 10px;
+}
+.brand small { display: block; font-size: 0.8rem; font-weight: normal; opacity: 0.8; margin-top: 2px; }
+
+.sidebar ul { list-style: none; margin: 0; padding: 0; }
+.sidebar a {
+  display: block;
+  padding: 12px 18px;
+  color: #fff;
+  text-decoration: none;
+  border-left: 4px solid transparent;
+}
+.sidebar a:hover { background: rgba(255, 255, 255, 0.12); }
+.sidebar a[aria-current="page"] {
+  background: rgba(255, 255, 255, 0.2);
+  border-left-color: #fff;
+  font-weight: bold;
+}
+.sidebar a:focus-visible { outline: 3px solid #fff; outline-offset: -3px; }
+
+/* ==========================================================
+   Dashboard page
+   ========================================================== */
+.dashboard { max-width: 1000px; margin: 16px auto; padding: 0 16px; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.stat-card {
+  background: #fff;
+  border: 2px solid var(--border);
+  border-left: 6px solid var(--green);
+  border-radius: 8px;
+  padding: 14px;
+}
+.stat-label { color: #5a6b5a; font-size: 0.9rem; }
+.stat-value { font-size: 1.5rem; font-weight: bold; color: var(--green-dark); margin-top: 4px; overflow-wrap: anywhere; }
+
+.table-wrap { overflow-x: auto; }
+.tx-table { width: 100%; border-collapse: collapse; }
+.tx-table th, .tx-table td { padding: 10px 8px; border-bottom: 1px solid var(--border); text-align: left; white-space: nowrap; }
+.tx-table th { background: var(--green-light); color: var(--green-dark); }
+.tx-table .num { text-align: right; }
+.table-note { color: #5a6b5a; margin: 10px 0 0; font-size: 0.9rem; }
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--green-dark);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px;
+}
+.link-btn:focus-visible { outline: 3px solid #1565c0; outline-offset: 2px; }
+
+.dash-actions { display: flex; gap: 10px; margin-top: 16px; }
+.dash-actions .btn { width: auto; padding: 12px 18px; font-weight: bold; text-decoration: none; display: inline-block; }
+
+/* Dashboard / navigation on narrow windows: sidebar becomes a top bar */
+@media (max-width: 900px) {
+  .app { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; position: static; padding: 10px 0 0; }
+  .brand { border-bottom: none; margin-bottom: 0; padding-bottom: 8px; }
+  .sidebar ul { display: flex; }
+  .sidebar a { border-left: none; border-bottom: 4px solid transparent; }
+  .sidebar a[aria-current="page"] { border-bottom-color: #fff; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Receipt item table: the four columns stay lined up on every row */
+.receipt-item {
+  display: grid;
+  grid-template-columns: 1fr 4ch 9ch 9ch;
+  gap: 8px;
+  margin: 6px 0;
+  align-items: start;
+}
+.receipt-item > span:nth-child(n+2) { text-align: right; }   /* Qty, Price, Subtotal on the right */
+.receipt-head { font-weight: bold; border-bottom: 1px solid #888; padding-bottom: 4px; }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Campus Cafeteria POS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- ===== LEFT NAVIGATION ===== -->
+    <nav class="sidebar" aria-label="Main navigation">
+      <div class="brand">Campus Cafeteria<small>POS system</small></div>
+      <ul>
+        <li><a href="dashboard.html" aria-current="page">Dashboard</a></li>
+        <li><a href="index.html">New Order</a></li>
+      </ul>
+    </nav>
+
+    <div class="content">
+
+      <header class="header">
+        <h1>Dashboard</h1>
+        <p>Sales summary for this browser</p>
+      </header>
+
+      <main class="dashboard">
+
+        <!-- Summary cards are created by dashboard.js -->
+        <div id="stats" class="stats"></div>
+
+        <section class="panel" aria-labelledby="recent-title">
+          <h2 id="recent-title">Recent Transactions</h2>
+          <!-- Table is created by dashboard.js -->
+          <div id="tx-table"></div>
+        </section>
+
+        <div class="dash-actions">
+          <a class="btn btn-primary" href="index.html">Start New Order</a>
+          <button id="reset-btn" class="btn btn-secondary">Reset Sales Data</button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

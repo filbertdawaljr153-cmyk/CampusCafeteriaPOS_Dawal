@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Order - Campus Cafeteria POS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- ===== LEFT NAVIGATION ===== -->
+    <nav class="sidebar" aria-label="Main navigation">
+      <div class="brand">Campus Cafeteria<small>POS system</small></div>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="index.html" aria-current="page">New Order</a></li>
+      </ul>
+    </nav>
+
+    <div class="content">
+
+      <header class="header">
+        <h1>New Order</h1>
+        <p>Lunch counter &mdash; rice meals, viands, snacks &amp; drinks</p>
+      </header>
+
+      <main class="layout">
+
+        <!-- ===== AREA 1: PRODUCTS (left) ===== -->
+        <section class="panel" aria-labelledby="products-title">
+          <h2 id="products-title">1. Products</h2>
+          <!-- Product cards are created by script.js -->
+          <div id="product-list" class="product-grid"></div>
+        </section>
+
+        <!-- Right column holds areas 2 and 3 -->
+        <div class="side">
+
+          <!-- ===== AREA 2: CART / ORDER SUMMARY ===== -->
+          <section class="panel" aria-labelledby="order-title">
+            <h2 id="order-title">2. Order Summary</h2>
+
+            <!-- Cart items are created by script.js -->
+            <div id="cart-items" class="cart-items"></div>
+
+            <div class="total-row">
+              <span>Total</span>
+              <span id="cart-total">₱0.00</span>
+            </div>
+
+            <!-- Success feedback: "item added", "item removed", etc. -->
+            <p id="status" class="status" role="status"></p>
+          </section>
+
+          <!-- ===== AREA 3: PAYMENT ENTRY ===== -->
+          <section class="panel payment-panel" aria-labelledby="payment-title">
+            <h2 id="payment-title">3. Payment</h2>
+
+            <label for="amount-paid">Amount Paid</label>
+            <input type="text" id="amount-paid" inputmode="decimal"
+                   placeholder="Enter cash amount" autocomplete="off">
+
+            <!-- Error feedback: invalid / insufficient payment -->
+            <p id="message" class="message" role="alert"></p>
+
+            <div class="button-row">
+              <button id="pay-btn" class="btn btn-primary">Pay Now</button>
+              <button id="new-btn" class="btn btn-secondary">New Transaction</button>
+            </div>
+          </section>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
