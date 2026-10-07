@@ -11,7 +11,7 @@
 // index.html, then change the "image" path of each product below.
 // If a file is missing, a gray "No image" box is shown instead.
 const PRODUCTS = [
-  { id: 1, name: "Rice (Plain)",         price: 15.00, image: "images/rice.jpg" },
+  { id: 1, name: "Rice (Plain)",         price: 15.00, image: "images/rices.jpg" },
   { id: 2, name: "Fried Chicken (1 pc)", price: 65.00, image: "images/chicken.jpg" },
   { id: 3, name: "Pork Adobo",           price: 60.00, image: "images/adoba.jpg" },
   { id: 4, name: "Vegetable Side Dish",  price: 35.00, image: "images/vegetables.jpg" },
