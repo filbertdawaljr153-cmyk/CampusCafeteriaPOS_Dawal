@@ -13,7 +13,7 @@
 const PRODUCTS = [
   { id: 1, name: "Rice (Plain)",         price: 15.00, image: "images/rice.jpg" },
   { id: 2, name: "Fried Chicken (1 pc)", price: 65.00, image: "images/chicken.jpg" },
-  { id: 3, name: "Pork Adobo",           price: 60.00, image: "images/adobo.jpg" },
+  { id: 3, name: "Pork Adobo",           price: 60.00, image: "images/adoba.jpg" },
   { id: 4, name: "Vegetable Side Dish",  price: 35.00, image: "images/vegetables.jpg" },
   { id: 5, name: "Iced Tea (cup)",       price: 20.00, image: "images/iced tea.jpg" },
   { id: 6, name: "Bottled Water",        price: 20.00, image: "images/water.jpg" }
